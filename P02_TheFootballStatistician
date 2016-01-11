@@ -1,0 +1,268 @@
+using System;
+using System.Collections.Generic;
+
+class TheFootballStatistician
+{
+    static void Main()
+    {
+        string[] teams = { "Arsenal", "Chelsea", "Everton", "Liverpool",
+                              "ManchesterCity", "ManchesterUnited", "Southampton", "Tottenham" };
+        int[] points = new int[8];
+        decimal money = 0;
+
+        decimal n = decimal.Parse(Console.ReadLine()) * 1.94m;
+
+        string line = Console.ReadLine();
+        while (!line.Equals("End of the league."))
+        {
+            money = money + n;
+            string[] outcome = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            string team1 = outcome[0];
+            string team2 = outcome[2];
+            string result = outcome[1];
+
+            if (result == "1")
+            {
+                switch (team1)
+                {
+                    case "Arsenal":
+                        points[0] += 3;
+                        break;
+                    case "Chelsea":
+                        points[1] += 3;
+                        break;
+                    case "Everton":
+                        points[2] += 3;
+                        break;
+                    case "Liverpool":
+                        points[3] += 3;
+                        break;
+                    case "ManchesterCity":
+                        points[4] += 3;
+                        break;
+                    case "ManchesterUnited":
+                        points[5] += 3;
+                        break;
+                    case "Southampton":
+                        points[6] += 3;
+                        break;
+                    case "Tottenham":
+                        points[7] += 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (result == "2")
+            {
+                switch (team2)
+                {
+                    case "Arsenal":
+                        points[0] += 3;
+                        break;
+                    case "Chelsea":
+                        points[1] += 3;
+                        break;
+                    case "Everton":
+                        points[2] += 3;
+                        break;
+                    case "Liverpool":
+                        points[3] += 3;
+                        break;
+                    case "ManchesterCity":
+                        points[4] += 3;
+                        break;
+                    case "ManchesterUnited":
+                        points[5] += 3;
+                        break;
+                    case "Southampton":
+                        points[6] += 3;
+                        break;
+                    case "Tottenham":
+                        points[7] += 3;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (team1)
+                {
+                    case "Arsenal":
+                        points[0] += 1;
+                        break;
+                    case "Chelsea":
+                        points[1] += 1;
+                        break;
+                    case "Everton":
+                        points[2] += 1;
+                        break;
+                    case "Liverpool":
+                        points[3] += 1;
+                        break;
+                    case "ManchesterCity":
+                        points[4] += 1;
+                        break;
+                    case "ManchesterUnited":
+                        points[5] += 1;
+                        break;
+                    case "Southampton":
+                        points[6] += 1;
+                        break;
+                    case "Tottenham":
+                        points[7] += 1;
+                        break;
+                    default:
+                        break;
+                }
+
+                switch (team2)
+                {
+                    case "Arsenal":
+                        points[0] += 1;
+                        break;
+                    case "Chelsea":
+                        points[1] += 1;
+                        break;
+                    case "Everton":
+                        points[2] += 1;
+                        break;
+                    case "Liverpool":
+                        points[3] += 1;
+                        break;
+                    case "ManchesterCity":
+                        points[4] += 1;
+                        break;
+                    case "ManchesterUnited":
+                        points[5] += 1;
+                        break;
+                    case "Southampton":
+                        points[6] += 1;
+                        break;
+                    case "Tottenham":
+                        points[7] += 1;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            line = Console.ReadLine();
+        }
+
+        teams[4] = "Manchester City";
+        teams[5] = "Manchester United";
+
+        Console.WriteLine("{0:F2}lv.", money);
+
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine("{0} - {1} points.", teams[i], points[i]);
+        }
+
+        // Version 2 - 2 Arrays - Index
+        /*
+        decimal money = 0;
+        int[] points = new int[8];
+        string[] teams = { "Arsenal", "Chelsea", "Everton", "Liverpool",
+                              "ManchesterCity", "ManchesterUnited", "Southampton", "Tottenham" };
+        Array.Sort(teams);
+
+        decimal n = decimal.Parse(Console.ReadLine()) * 1.94m;
+        string line = Console.ReadLine();
+
+        while (!line.Equals("End of the league."))
+        {
+            money = money + n;
+            string[] outcome = line.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+            int index1 = Array.IndexOf(teams, outcome[0]);
+            int index2 = Array.IndexOf(teams, outcome[2]);
+
+            switch (outcome[1])
+            {
+                case "1":
+                    points[index1] += 3;
+                    break;
+                case "2":
+                    points[index2] += 3;
+                    break;
+                case "X":
+                    points[index1] += 1;
+                    points[index2] += 1;
+                    break;
+            }
+            
+            line = Console.ReadLine();
+        }
+        teams[4] = "Manchester City";
+        teams[5] = "Manchester United";
+
+        Console.WriteLine("{0:F2}lv.", money);
+
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine("{0} - {1} points.", teams[i], points[i]);
+        }
+        */
+
+        // Version 3 - Dictionary
+        /*
+        SortedDictionary<string, int> points = new SortedDictionary<string, int>();
+        points.Add("Arsenal", 0);
+        points.Add("Chelsea", 0);
+        points.Add("Everton", 0);
+        points.Add("Liverpool", 0);
+        points.Add("ManchesterCity", 0);
+        points.Add("ManchesterUnited", 0);
+        points.Add("Southampton", 0);
+        points.Add("Tottenham", 0);
+
+        decimal money = 0;
+        decimal n = decimal.Parse(Console.ReadLine()) * 1.94m;
+        string line = Console.ReadLine();
+
+        while (!line.Equals("End of the league."))
+        {
+            money = money + n;
+            string[] outcome = line.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+            switch (outcome[1])
+            {
+                case "1":
+                    name = outcome[0];
+                    points[name] += 3;
+                    break;
+                case "2":
+                    points[outcome[2]] += 3;
+                    break;
+                case "X":
+                    points[outcome[0]] += 1;
+                    points[outcome[2]] += 1;
+                    break;
+            }
+            
+            line = Console.ReadLine();
+        }
+
+        Console.WriteLine("{0:F2}lv.", money);
+        foreach (KeyValuePair<string, int> kvp in points)
+        {
+            string name = kvp.Key;
+            if (name == "ManchesterUnited")
+            {
+                name = "Manchester United";
+            }
+
+            if (name == "ManchesterCity")
+            {
+                name = "Manchester City";
+            }
+
+            Console.WriteLine("{0} - {1} points.", name, kvp.Value);
+        }
+        */
+    }
+}
