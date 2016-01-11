@@ -1,38 +1,26 @@
 using System;
-using System.Linq;
 
-class TeleportPoints
+class StripedTowel
 {
     static void Main()
     {
-        decimal[] a = Console.ReadLine().Split().Select(n => decimal.Parse(n)).ToArray();
-        decimal[] b = Console.ReadLine().Split().Select(n => decimal.Parse(n)).ToArray();
-        decimal[] c = Console.ReadLine().Split().Select(n => decimal.Parse(n)).ToArray();
-        decimal[] d = Console.ReadLine().Split().Select(n => decimal.Parse(n)).ToArray();
-        decimal r = decimal.Parse(Console.ReadLine());
-        decimal s = decimal.Parse(Console.ReadLine());
-        int count = 0;
-        
-        int m = (int)Math.Floor(r / s);
-        decimal dim = m * s;
-        if (dim >= r)
-        {
-            dim = dim - s;
-        }
+        int n = int.Parse(Console.ReadLine());
 
-        for (decimal y = -dim; y <= dim; y += s)
+        for (int row = 0; row < n + n / 2; row ++)
         {
-            for (decimal x = -dim; x <= dim; x += s)
+            int count = row % 3;
+            for (int col = 0; col < n; col ++)
             {
-                if (c[1] > y && y > a[1] &&
-                    c[0] > x && x > a[0] &&
-                    (x * x) + (y * y) < (r * r))
+                if ((row + col) % 3 == 0)
                 {
-                    count++;
+                    Console.Write("#");
+                }
+                else
+                {
+                    Console.Write(".");
                 }
             }
+            Console.WriteLine();
         }
-        
-        Console.WriteLine(count);
     }
 }
