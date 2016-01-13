@@ -1,0 +1,56 @@
+using System;
+
+class WaveBits
+{
+    static void Main()
+    {
+        int max = 0;
+        int index = 0;
+
+        ulong input = ulong.Parse(Console.ReadLine());
+
+        string bin = Convert.ToString((long)input, 2).PadLeft(64, '0');
+
+        for (int i = bin.Length - 1; i >= 0; i--)
+        {
+            if (bin[i] == '1')
+            {
+                int count = 1;
+
+                for (int j = i; j >= 1; j--)
+                {
+                    if (bin[j] != bin[j - 1])
+                    {
+                        count++;
+
+                        if (count % 2 != 0 && max < count)
+                        {
+                            max = count;
+                            index = j - 1;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        bin = bin.Remove(index, max);
+        bin = bin.PadLeft(64, '0');
+        long output = Convert.ToInt64(bin, 2);
+
+        //string result = bin.Substring(0, index);
+        //result = result + bin.Substring(index + max);
+
+        if (max == 0)
+        {
+            Console.WriteLine("No waves found!");
+        }
+        else
+        {
+            Console.WriteLine(output);
+        }
+    }
+}
